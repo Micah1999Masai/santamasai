@@ -14,5 +14,5 @@ def main() :
 def predict_class(image) :
     with st.spinner('Loading Model...'):
         classifier_model = keras.models.load_model(r'mynetwork.h5', compile = False)
-pred = model.predict(image_np)
+pred = classifier_model.predict(image_np)
 print(pred)
