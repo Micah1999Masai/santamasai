@@ -1,20 +1,23 @@
-from PIL import Image
-import tensorflow.keras as keras
+import streamlit as st
+from img_classification import teachable_machine_classification
+from PIL import Image, ImageOps
+from tensorflow.keras.preprocessing.image import load_img,img_to_array
+from tensorflow.keras.models import load_model
 import numpy as np
-import sys
-
-def main() :
-    file_uploaded = st.file_uploader('Choose an image...', type = 'jpg')
-    if file_uploaded is not None :
-        image = Image.open(file_uploaded)
-        st.write("Uploaded Image.")
-        figure = plt.figure()
-        plt.imshow(image)
-        plt.axis('off')
-        st.pyplot(figure)
-def predict_class(image) :
-    with st.spinner('Loading Model...'):
-        classifier_model = keras.models.load_model(r'mynetwork.h5', compile = False)
-model = keras.Sequential([hub.KerasLayer(classifier_model, input_shape = shape)])
-pred = model.predict(image_np)
-print(pred)
+import keras
+st.title("Brain Tumor or Healthy Brain")
+st.header("Brain Tumor MRI Classifier")
+st.text("Upload a brain MRI Image for image classification as tumor or Healthy Brain")
+     
+uploaded_file = st.file_uploader("Choose an image...", type=["jpg","png","jpeg"])
+if uploaded_file is not None:
+    image = Image.open(uploaded_file)
+    st.image(image, caption='Uploaded Image.', use_column_width=True)
+    st.write("Classifying...")
+    
+    st.write("")
+    label = teachable_machine_classification(image, 'mynetwork.h5')
+    if label == 0:
+       st.write("The MRI scan detects a brain tumor")
+    else:
+       st.write("The MRI scan shows an healthy brain")
