@@ -7,3 +7,5 @@ pandas>=1.3.4
 setuptools>=58.0.4
 tensorflow-hub>=0.12.0
 tensorflow
+opencv-python-headless
+keras
