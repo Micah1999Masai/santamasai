@@ -11,6 +11,8 @@ def main() :
         plt.imshow(image)
         plt.axis('off')
         st.pyplot(figure)
-model = load_model('mynetwork.h5')
+def predict_class(image) :
+    with st.spinner('Loading Model...'):
+        classifier_model = keras.models.load_model(r'mynetwork.h5', compile = False)
 pred = model.predict(image_np)
 print(pred)
