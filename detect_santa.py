@@ -14,5 +14,6 @@ def main() :
 def predict_class(image) :
     with st.spinner('Loading Model...'):
         classifier_model = keras.models.load_model(r'mynetwork.h5', compile = False)
-pred = classifier_model.predict(image_np)
+model = keras.Sequential([hub.KerasLayer(classifier_model, input_shape = shape)])
+pred = model.predict(image_np)
 print(pred)
