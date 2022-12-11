@@ -1,5 +1,4 @@
 from PIL import Image
-from keras.models import load_model
 import numpy as np
 import sys
 
