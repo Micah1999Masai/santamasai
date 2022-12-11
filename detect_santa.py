@@ -9,6 +9,6 @@ image = image.resize((im_width, im_height), Image.ANTIALIAS)
 image_np = np.array(image.getdata()).reshape(
     (1, im_height, im_width, 3)).astype(np.float32) / 255.
 
-model = load_model('santa.h5')
+model = load_model('mynetwork.h5')
 pred = model.predict(image_np)
 print(pred)
